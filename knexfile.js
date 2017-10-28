@@ -11,10 +11,10 @@ module.exports = {
   production: {
     client: 'mysql',
     connection: {
-      host: '',
-      user: 'qlin',
+      host: '172.16.16.17',
+      user: 'root',
       password: '',
-      database: '',
+      database: 'cos',
     },
   },
 };
