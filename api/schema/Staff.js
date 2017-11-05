@@ -1,11 +1,10 @@
 const Staff = `
   type Staff {
-    id: Int!
-    type: Int!
-    love: Int
+    sid: ID!
+    vote(sid: ID!, uid: ID = -1): Vote
     masterpiece: [String]!
     info: String
-    ex_price: String
+    exPrice: String
   }
 `;
 

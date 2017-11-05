@@ -1,9 +1,9 @@
 const Comment = `
   type Comment {
-    id: Int
+    id: ID
     user: User!
     message: String!
-    weight: Int
+    weight(cid: ID!, uid: ID = -1): Weight
     ctime: Int
   }
 `;

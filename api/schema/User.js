@@ -1,10 +1,12 @@
 const User = `
   type User {
-    id: Int!
+    uid: ID!
     name: String!
+    type: Int
     avatar: String
     message: String
-    staff: Staff
+    city: String
+    staff(city: String = '全国'): Staff
   }
 `;
 
