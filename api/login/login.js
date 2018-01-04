@@ -1,5 +1,6 @@
 import shortid from 'shortid';
-import md5 from 'md5';
+
+import CryptoJS from 'crypto-js';
 
 import { getSalt } from '../utils';
 import { localAuth, user } from '../db/table';
@@ -18,7 +19,7 @@ class Login {
     this.connector(localAuth).insert({
       uid,
       phone,
-      password: md5(password + salt),
+      password: CryptoJS.SHA3(password + salt),
       salt,
       ctime,
     });
@@ -37,7 +38,7 @@ class Login {
         phone,
       });
     if (salt) {
-      const pw = md5(rawPassword + salt);
+      const pw = CryptoJS.SHA3(rawPassword + salt);
       if (pw === password) {
         return this.token.getToken(uid, password, salt);
       }

@@ -1,4 +1,4 @@
-import md5 from 'md5';
+import CryptoJS from 'crypto-js';
 
 import { TOKEN_EXPIRE_TIME, TOKEN_OVERFLOW_UP_TIME } from '../setup';
 import { localAuth, token } from './table';
@@ -18,8 +18,8 @@ class Token {
         });
     }
     const { password, salt } = other;
-    const accessToken = md5(uid + password + salt + time);
-    const refreshToken = md5(uid + password + salt + time + TOKEN_EXPIRE_TIME);
+    const accessToken = CryptoJS.SHA3(uid + password + salt + time);
+    const refreshToken = CryptoJS.SHA3(uid + password + salt + time + TOKEN_EXPIRE_TIME);
     this.connector(token).insert({
       accessToken,
       expireIn: TOKEN_EXPIRE_TIME,

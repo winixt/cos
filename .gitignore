@@ -2,3 +2,4 @@
 yarn-error.log
 /log
 /file
+*.DS_Store

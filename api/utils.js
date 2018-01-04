@@ -1,9 +1,16 @@
 /**
  * 生成用户盐值
  */
-export function getSalt() {
-  return Math.random().toString(16).slice(2);
-}
+
+const CHARS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890#$%^&*()_=+!~.>?/,][';
+export function getSalt(len = 32){
+  const max = CHARS.length;
+  let str = '';
+  for (let i = 0; i < len; i++) {
+　　　　str += chars.charAt(Math.floor(Math.random() * max));
+  }
+  return str;
+};
 
 const HEADER_REGEX = /bearer (.*)$/;
 export function extractToken(authorization) {
