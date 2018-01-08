@@ -1,0 +1,34 @@
+INSERT INTO user ( uid, type, name, message, avatar )
+                       VALUES
+                       ( 1, 1, '米纳森', 'coser 之米纳森', 'https://gss0.baidu.com/-4o3dSag_xI4khGko9WTAnF6hhy/zhidao/wh%3D600%2C800/sign=adcf659a3cc79f3d8fb4ec368a91e129/203fb80e7bec54e752233a7bbe389b504ec26a83.jpg');
+INSERT INTO user ( uid, type, name, message, avatar )
+                       VALUES
+                       ( 2, 1, '海阳', 'coser 之海阳', 'https://gss0.baidu.com/94o3dSag_xI4khGko9WTAnF6hhy/zhidao/wh%3D600%2C800/sign=1c5222fd59df8db1bc7b74623913f16c/d439b6003af33a87a962237fc15c10385343b543.jpg');
+                       INSERT INTO user ( uid, type, name, message, avatar )
+                       VALUES
+                       ( 3, 1, '紫玫瑰', 'coser 之紫玫瑰', 'https://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/wh%3D600%2C800/sign=4f16cb01514e9258a6618ee8acb2fd60/c75c10385343fbf2f4248546b77eca8065388f4e.jpg');
+                       INSERT INTO user ( uid, type, name, message, avatar )
+                       VALUES
+                       ( 4, 1, '罗汉松', 'coser 之罗汉松', 'http://www.touxiang888.com/uploads/allimg/170214/1Q400AA-0.jpg');
+                       INSERT INTO user ( uid, type, name, message, avatar )
+                       VALUES
+                       ( 5, 1, '白色绒球', 'coser 之白色绒球', 'http://www.158pic.com/uploads/allimg/171108/2-1G10QF9280-L.jpg');
+                       INSERT INTO user ( uid, type, name, message, avatar )
+                       VALUES
+                       ( 6, 1, '海棠', 'coser 之海棠', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvlDEis0V2Q4zSn9SZmKqnL_Jr8zuyLuXdF_hL6adDyZ4_rHoh');
+                       INSERT INTO user ( uid, type, name, message, avatar )
+                       VALUES
+                       ( 21, 2, '秋水', 'coser 之秋水', 'http://www.qq2e.com/uploads/allimg/c150203/142292051L9210-125C.jpg');
+                       INSERT INTO user ( uid, type, name, message, avatar )
+                       VALUES
+                       ( 31, 3, '晴露', 'coser 之晴露', 'http://www.xlmcpe.com/wp-content/uploads/2017/07/71c6f3b83067b086b149ba8c0f7535d5.jpg');
+                       INSERT INTO user ( uid, type, name, message, avatar )
+                       VALUES
+                       ( 41, 4, '影不离形', 'coser 之影不离形', 'https://ws1.sinaimg.cn/large/c524f7d4jw1erfb33c627j20m80m8421.jpg');
+                       INSERT INTO user ( uid, type, name, message, avatar )
+                       VALUES
+                       ( 51, 5, '改天换地', 'coser 之秋水改天换地', 'http://www.riji88.com/qqtouxiang/images/2011121/20111218114111585.jpg');
+
+
+
+

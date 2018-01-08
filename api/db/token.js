@@ -18,8 +18,8 @@ class Token {
         });
     }
     const { password, salt } = other;
-    const accessToken = CryptoJS.SHA3(uid + password + salt + time);
-    const refreshToken = CryptoJS.SHA3(uid + password + salt + time + TOKEN_EXPIRE_TIME);
+    const accessToken = CryptoJS.SHA3(uid + password + salt + time).toString();
+    const refreshToken = CryptoJS.SHA3(uid + password + salt + time + TOKEN_EXPIRE_TIME).toString();
     this.connector(token).insert({
       accessToken,
       expireIn: TOKEN_EXPIRE_TIME,

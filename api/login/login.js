@@ -19,7 +19,7 @@ class Login {
     this.connector(localAuth).insert({
       uid,
       phone,
-      password: CryptoJS.SHA3(password + salt),
+      password: CryptoJS.SHA3(password + salt).toString(),
       salt,
       ctime,
     });
@@ -38,7 +38,7 @@ class Login {
         phone,
       });
     if (salt) {
-      const pw = CryptoJS.SHA3(rawPassword + salt);
+      const pw = CryptoJS.SHA3(rawPassword + salt).toString();
       if (pw === password) {
         return this.token.getToken(uid, password, salt);
       }

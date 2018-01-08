@@ -7,7 +7,7 @@ const Input = `
 
   input UserInput {
     uid: ID!
-    type: INT
+    type: Int
     name: String
     message: String
     avatar: String

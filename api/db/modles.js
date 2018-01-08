@@ -2,10 +2,12 @@ import Comment from './comment';
 import Token from './token';
 import User from './user';
 import IM from './im';
+import Feedback from './feedback';
 
-export default {
+module.exports = {
   Comment,
   Token,
   User,
   IM,
+  Feedback,
 };

@@ -1,0 +1,30 @@
+INSERT INTO staff ( uid, info, masterpiece, exPrice, city ) VALUES 
+(1, '专业裁缝10年', '[{"url": "http://p1.pstatp.com/large/288a00018a409f156ed0", "width": 1080, "height": 1080}, {"url": "http://www.jjdao.com/uploads/allimg/1702/5-1F22QF511.jpg", "width": 1080, "height": 1080}, {"url": "http://img.mp.itc.cn/upload/20170326/cda2773bb2c24f9cbf936cc767723b17_th.jpeg", "width": 1080, "height": 450}]
+', '50-100', '广州');
+INSERT INTO staff ( uid, info, masterpiece, exPrice, city ) VALUES
+(2, '专业裁缝20年', '[{"url": "http://p1.pstatp.com/large/288a00018a409f156ed0", "width": 1080, "height": 1080}, {"url": "http://www.jjdao.com/uploads/allimg/1702/5-1F22QF511.jpg", "width": 1080, "height": 1080}, {"url": "http://img.mp.itc.cn/upload/20170326/cda2773bb2c24f9cbf936cc767723b17_th.jpeg", "width": 1080, "height": 450}]
+', '50-200', '深圳');
+INSERT INTO staff ( uid, info, masterpiece, exPrice, city ) VALUES
+(3, '专业裁缝30年', '[{"url": "http://p1.pstatp.com/large/288a00018a409f156ed0", "width": 1080, "height": 1080}, {"url": "http://www.jjdao.com/uploads/allimg/1702/5-1F22QF511.jpg", "width": 1080, "height": 1080}, {"url": "http://img.mp.itc.cn/upload/20170326/cda2773bb2c24f9cbf936cc767723b17_th.jpeg", "width": 1080, "height": 450}]
+', '50-300', '北京');
+INSERT INTO staff ( uid, info, masterpiece, exPrice, city ) VALUES
+(4, '专业裁缝40年', '[{"url": "http://p1.pstatp.com/large/288a00018a409f156ed0", "width": 1080, "height": 1080}, {"url": "http://www.jjdao.com/uploads/allimg/1702/5-1F22QF511.jpg", "width": 1080, "height": 1080}, {"url": "http://img.mp.itc.cn/upload/20170326/cda2773bb2c24f9cbf936cc767723b17_th.jpeg", "width": 1080, "height": 450}]
+', '50-400', '上海');
+INSERT INTO staff ( uid, info, masterpiece, exPrice, city ) VALUES
+(5, '专业裁缝50年', '[{"url": "http://p1.pstatp.com/large/288a00018a409f156ed0", "width": 1080, "height": 1080}, {"url": "http://www.jjdao.com/uploads/allimg/1702/5-1F22QF511.jpg", "width": 1080, "height": 1080}, {"url": "http://img.mp.itc.cn/upload/20170326/cda2773bb2c24f9cbf936cc767723b17_th.jpeg", "width": 1080, "height": 450}]
+', '50-500', '成都');
+INSERT INTO staff ( uid, info, masterpiece, exPrice, city ) VALUES
+(6, '专业裁缝60年', '[{"url": "http://p1.pstatp.com/large/288a00018a409f156ed0", "width": 1080, "height": 1080}, {"url": "http://www.jjdao.com/uploads/allimg/1702/5-1F22QF511.jpg", "width": 1080, "height": 1080}, {"url": "http://img.mp.itc.cn/upload/20170326/cda2773bb2c24f9cbf936cc767723b17_th.jpeg", "width": 1080, "height": 450}]
+', '50-600', '成都');
+INSERT INTO staff ( uid, info, masterpiece, exPrice, city ) VALUES
+(21, '专业道具21年', '[{"url": "http://p1.pstatp.com/large/288a00018a409f156ed0", "width": 1080, "height": 1080}, {"url": "http://www.jjdao.com/uploads/allimg/1702/5-1F22QF511.jpg", "width": 1080, "height": 1080}, {"url": "http://img.mp.itc.cn/upload/20170326/cda2773bb2c24f9cbf936cc767723b17_th.jpeg", "width": 1080, "height": 450}]
+', '50-210', '山东');
+INSERT INTO staff ( uid, info, masterpiece, exPrice, city ) VALUES
+(31, '专业妆娘31年', '[{"url": "http://p1.pstatp.com/large/288a00018a409f156ed0", "width": 1080, "height": 1080}, {"url": "http://www.jjdao.com/uploads/allimg/1702/5-1F22QF511.jpg", "width": 1080, "height": 1080}, {"url": "http://img.mp.itc.cn/upload/20170326/cda2773bb2c24f9cbf936cc767723b17_th.jpeg", "width": 1080, "height": 450}]
+', '0', '广西');
+INSERT INTO staff ( uid, info, masterpiece, exPrice, city ) VALUES
+(41, '专业摄影41年', '[{"url": "http://p1.pstatp.com/large/288a00018a409f156ed0", "width": 1080, "height": 1080}, {"url": "http://www.jjdao.com/uploads/allimg/1702/5-1F22QF511.jpg", "width": 1080, "height": 1080}, {"url": "http://img.mp.itc.cn/upload/20170326/cda2773bb2c24f9cbf936cc767723b17_th.jpeg", "width": 1080, "height": 450}]
+', '100-200', '河南');
+INSERT INTO staff ( uid, info, masterpiece, exPrice, city ) VALUES
+(51, '专业后期51年', '[{"url": "http://p1.pstatp.com/large/288a00018a409f156ed0", "width": 1080, "height": 1080}, {"url": "http://www.jjdao.com/uploads/allimg/1702/5-1F22QF511.jpg", "width": 1080, "height": 1080}, {"url": "http://img.mp.itc.cn/upload/20170326/cda2773bb2c24f9cbf936cc767723b17_th.jpeg", "width": 1080, "height": 450}]
+', '100-200', '河北');

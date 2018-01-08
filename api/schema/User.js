@@ -6,7 +6,7 @@ const User = `
     avatar: String
     message: String
     city: String
-    staff(city: String = '全国'): Staff
+    staff(city: String = "全国"): Staff
   }
 `;
 

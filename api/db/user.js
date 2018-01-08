@@ -6,10 +6,11 @@ class User {
     this.connector = connector;
   }
 
-  getUser(uid) {
-    return this.connector(user).where({
+  async getUser(uid) {
+    const result = await this.connector(user).where({
       uid,
     });
+    return result[0];
   }
 
   updateUser(args) {

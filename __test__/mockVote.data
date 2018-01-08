@@ -1,0 +1,12 @@
+INSERT INTO vote ( uid, sid, ctime ) VALUES
+(1, 1, '1515130509000');
+INSERT INTO vote ( uid, sid, ctime ) VALUES
+(1, 2, '1515130509000');
+INSERT INTO vote ( uid, sid, ctime ) VALUES
+(1, 3, '1515130509000');
+INSERT INTO vote ( uid, sid, ctime ) VALUES
+(1, 4, '1515130509000');
+INSERT INTO vote ( uid, sid, ctime ) VALUES
+(1, 5, '1515130509000');
+INSERT INTO vote ( uid, sid, ctime ) VALUES
+(1, 6, '1515130509000');

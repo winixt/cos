@@ -1,0 +1,20 @@
+INSERT INTO comment ( uid, sid, message, ctime ) VALUES
+(1, 1, '还原度非常高, 赞1', '1515130504973');
+INSERT INTO comment ( uid, sid, message, ctime ) VALUES
+(2, 1, '还原度非常高, 赞2', '1515130505000');
+INSERT INTO comment ( uid, sid, message, ctime ) VALUES
+(3, 1, '还原度非常高, 赞3', '1515130506000');
+INSERT INTO comment ( uid, sid, message, ctime ) VALUES
+(4, 1, '还原度非常高, 赞4', '1515130507000');
+INSERT INTO comment ( uid, sid, message, ctime ) VALUES
+(5, 1, '还原度非常高, 赞5', '1515130508000');
+INSERT INTO comment ( uid, sid, message, ctime ) VALUES
+(6, 1, '还原度非常高, 赞6', '1515130509000');
+INSERT INTO comment ( uid, sid, message, ctime ) VALUES
+(3, 2, '还原度非常高, 赞3-3', '1515130506000');
+INSERT INTO comment ( uid, sid, message, ctime ) VALUES
+(4, 3, '还原度非常高, 赞4-4', '1515130507000');
+INSERT INTO comment ( uid, sid, message, ctime ) VALUES
+(5, 4, '还原度非常高, 赞5-5', '1515130508000');
+INSERT INTO comment ( uid, sid, message, ctime ) VALUES
+(6, 5, '还原度非常高, 赞6-6', '1515130509000');
