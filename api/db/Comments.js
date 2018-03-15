@@ -1,18 +1,18 @@
-import { comment, weight } from './table';
+import { comments, commentWeight } from './table';
 
-class Comment {
+class Comments {
   constructor({ connector }) {
     this.connector = connector;
   }
   getComment(...args) {
     const { sid, offset, limit } = args;
-    return this.connector(comment).where({
+    return this.connector(comments).where({
       sid,
     }).limit(limit).offset(offset);
   }
   addComment(args) {
     const { uid, sid, message } = args;
-    return this.connector(comment).insert({
+    return this.connector(comments).insert({
       uid,
       sid,
       message,
@@ -21,23 +21,23 @@ class Comment {
   }
   delComment(args) {
     const { cid } = args;
-    this.connector(weight).where({
+    this.connector(commentWeight).where({
       cid,
     }).del();
-    return this.connector(comment, cid).where({
+    return this.connector(comments, cid).where({
       id: cid,
     }).del();
   }
   async getWeight(args) {
     const { cid, uid } = args;
     let active = false;
-    const count = await this.connector(weight)
+    const count = await this.connector(commentWeight)
       .count()
       .where({
         cid,
       });
     if (uid !== -1) {
-      active = await this.connector(weight)
+      active = await this.connector(commentWeight)
         .select(1)
         .where({
           uid,
@@ -50,7 +50,7 @@ class Comment {
   }
   upWeight(args) {
     const { cid, uid } = args;
-    return this.connector(weight).insert({
+    return this.connector(commentWeight).insert({
       cid,
       uid,
       ctime: Date.now(),
@@ -58,4 +58,4 @@ class Comment {
   }
 }
 
-export default Comment;
+export default Comments;

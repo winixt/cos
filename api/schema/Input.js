@@ -1,8 +1,8 @@
 const Input = `
   input CommentInput {
-    sid: ID!
+    cosId: ID!
     uid: ID!
-    message: ID!
+    content: String
   }
 
   input UserInput {

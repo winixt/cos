@@ -1,20 +1,13 @@
-import express from 'express';
-import bodyParse from 'body-parser';
-import { execute, subscribe } from 'graphql';
-import { createServer } from 'http';
-import { graphqlExpress, graphiqlExpress } from 'apollo-server-express';
-import { SubscriptionServer } from 'subscriptions-transport-ws';
-
-import { authenticate } from './authentication';
-import { extractToken } from './utils';
+import Koa from 'koa';
+import KoaRouter from 'koa-router';
+import koaBody from 'koa-bodyparser';
+import { graphqlKoa, graphiqlKoa } from 'apollo-server-koa';
 
 import knex from './db';
-import { User, Comment, Token, IM, Feedback } from './db/modles';
+import { Users, Comments, IM, Feedback } from './db/modles';
 import schema from './schema';
-import { mountLoginAPI } from './login/loginAPI';
 
 export function run() {
-  const token = new Token(knex);
   const PORT = 3000;
 
   // 全局异常处理 TODO
@@ -26,80 +19,31 @@ export function run() {
   process.on('exit', (code) => {
     console.log(`${code}: process exit and database disconnect`);
   });
-  const server = express();
 
-  // 中间件设置响应头
-  server.use((req, res, next) => {
-    res.setHeader('Content-Type', 'application/json;charset=UTF-8');
-    next();
-  });
-  // 利用中间件将请求参数格式化为 JSON
-  server.use(bodyParse.json());
+  const app = new Koa();
+  const router = new KoaRouter();
 
-  mountLoginAPI(server, token);
-
-  // const buildOptions = async (req, res) => {
-  //   const result = await authenticate(req.headers.authorization, token);
-  //   if (result) {
-  //     return {
-  //       schema,
-  //       context: {
-  //         User: new User({ connector: knex }),
-  //         Comment: new Comment({ connector: knex }),
-  //         IM: new IM({ connector: knex }),
-  //         Feedback: new Feedback({ connector: knex }),
-  //       },
-  //     };
-  //   }
-  //   res.send({
-  //     error: '未登陆',
-  //   });
-  //   return result;
-  // };
-
-  const buildOptions = (req) => {
-    const [uid, accessToken] = extractToken(req.headers.authorization);
-    return {
-      schema,
-      context: {
-        User: new User({ connector: knex }),
-        Comment: new Comment({ connector: knex }),
-        IM: new IM({ connector: knex }),
-        Feedback: new Feedback({ connector: knex }),
-        uid,
-        accessToken,
-      },
-    };
+  const params = {
+    schema,
+    context: {
+      User: new Users({ connector: knex }),
+      Comment: new Comments({ connector: knex }),
+      IM: new IM({ connector: knex }),
+      Feedback: new Feedback({ connector: knex }),
+    },
   };
 
-  server.use(
-    '/graphql',
-    graphqlExpress(buildOptions),
-  );
-  // 测试
-  server.use(
-    '/graphiql',
-    graphiqlExpress({
-      endpointURL: '/graphql',
-      subscriptionsEndpoint: `ws://localhost:${PORT}/subscriptions`,
-    }),
-  );
-  const ws = createServer(server);
-  ws.listen(PORT, () => {
-    console.log(`apollo server run on localhost:${PORT}`);
-    return new SubscriptionServer({
-      execute,
-      subscribe,
-      schema,
-      onConnect: (connectionParams) => {
-        if (connectionParams.authToken) {
-          return authenticate(connectionParams.authToken, token);
-        }
-        throw new Error('Missing auth token');
-      },
-    }, {
-      server: ws,
-      path: '/subscriptions',
-    });
-  });
+  // koaBody is needed just for POST
+  app.use(koaBody());
+
+  router.post('/graphql', graphqlKoa(params));
+  router.get('/graphql', graphqlKoa(params));
+
+  router.get('/graphiql', graphiqlKoa({
+    endpointURL: '/graphql', // a POST enppoint that GraphiQl will make the actual request to
+  }));
+
+  app.use(router.routes());
+  app.use(router.allowedMethods());
+  app.listen(PORT);
 }

@@ -1,13 +1,13 @@
-import Comment from './comment';
+import Comments from './Comments';
 import Token from './token';
-import User from './user';
+import Users from './Users';
 import IM from './im';
 import Feedback from './feedback';
 
 module.exports = {
-  Comment,
+  Comments,
   Token,
-  User,
+  Users,
   IM,
   Feedback,
 };

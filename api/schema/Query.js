@@ -1,19 +1,29 @@
-import User from './User';
-import Staff from './Staff';
-import Comment from './Comment';
+import Users from './Users';
+import CosHelper from './CosHelper';
+import Comments from './Comments';
 import Vote from './Vote';
-import Weight from './Weight';
+import CommentWeight from './CommentWeight';
 import IM from './IM';
 import Feedback from './Feedback';
-import Image from './Image';
+import RepresentWork from './RepresentWork';
 
 const Query = `
   type Query {
-    user(uid: ID!): User
-    staff(type: Int = 0, offset: Int = 0, limit: Int = 10): [User]!
-    comment(sid: ID!, offset: Int = 0, limit: Int = 10): [Comment]!
+    user(uid: ID!): Users
+    cosHelper(type: Int = 0, offset: Int = 0, limit: Int = 10): [Users]!
+    comment(sid: ID!, offset: Int = 0, limit: Int = 10): [Comments]!
     im(uid: ID!): [ImMember]!
   }
 `;
 
-export default [Query, User, Staff, Comment, Vote, Weight, Feedback, Image, ...IM];
+export default [
+  Query,
+  Users,
+  CosHelper,
+  Comments,
+  Vote,
+  CommentWeight,
+  Feedback,
+  RepresentWork,
+  ...IM,
+];

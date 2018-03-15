@@ -1,12 +1,14 @@
 const User = `
   type User {
-    uid: ID!
-    name: String!
+    id: ID!
     type: Int
+    nickname: String
     avatar: String
     message: String
     city: String
-    staff(city: String = "全国"): Staff
+    ctime: String
+    loginTime: String
+    cosHelper(city: String = "全国"): CosHelper
   }
 `;
 

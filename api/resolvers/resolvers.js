@@ -5,34 +5,34 @@ import { pubsub } from '../subscriptions';
 const resolvers = {
   Query: {
     user: (obj, args, context) => {
-      return context.User.getUser(args.uid);
+      return context.Users.getUser(args.uid);
     },
-    staff: (obj, args, context) => {
-      return context.User.getUsers(args);
+    cosHelper: (obj, args, context) => {
+      return context.Users.getUsers(args);
     },
     comment: (obj, args, context) => {
-      return context.Comment.getComment(args);
+      return context.Comments.getComment(args);
     },
   },
   User: {
-    staff: (obj, args, context) => {
-      return context.User.getStaff(obj.uid, args);
+    cosHelper: (obj, args, context) => {
+      return context.Users.getCosHelper(obj.uid, args);
     },
   },
-  Staff: {
+  CosHelper: {
     vote: (obj, args, context) => {
-      return context.User.getVote(args);
+      return context.Users.getVote(args);
     },
-    images: (obj, args, context) => {
-      return context.User.getImages(obj.masterpiece);
+    representWork: (obj, args, context) => {
+      return context.Users.getRepresentWork(obj.masterpiece);
     },
   },
-  Comment: {
+  Comments: {
     user: (obj, args, context) => {
-      return context.User.getUser(obj.uid);
+      return context.Users.getUser(obj.uid);
     },
-    weight: (obj, args, context) => {
-      return context.Comment.getWeight(args);
+    commentWeight: (obj, args, context) => {
+      return context.Comments.getWeight(args);
     },
   },
   ImMember: {

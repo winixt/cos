@@ -4,7 +4,7 @@ const Feedback = `
     uid: ID
     contack: String
     content: String
-    ctime: Int
+    ctime: String
   }
 `;
 

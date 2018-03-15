@@ -1,15 +1,15 @@
-import { user, staff, vote } from './table';
+import { users, cosHelper, vote } from './table';
 import { EMPTY_OBJ } from '../setup';
 
 
 // TODO 数据个添加 | 更改
-class User {
+class Users {
   constructor({ connector }) {
     this.connector = connector;
   }
 
   async getUser(uid) {
-    const result = await this.connector(user).where({
+    const result = await this.connector(users).where({
       uid,
     });
     return result[0];
@@ -17,7 +17,7 @@ class User {
 
   updateUser(args) {
     const { uid, ...other } = args;
-    return this.connector(user).where({
+    return this.connector(users).where({
       uid,
     }).update(other);
   }
@@ -25,26 +25,26 @@ class User {
   getUsers(args) {
     const { type, offset, limit } = args;
     if (type) {
-      return this.connector(user).where({
+      return this.connector(users).where({
         type,
       }).limit(limit).offset(offset);
     }
-    return this.connector(user).limit(limit).offset(offset);
+    return this.connector(users).limit(limit).offset(offset);
   }
 
   getUsersByID(uids) {
-    return this.connector(user).whereIn('uid', uids);
+    return this.connector(users).whereIn('uid', uids);
   }
 
-  async getStaff(uid, args) {
+  async getCosHelper(uid, args) {
     const { city } = args || EMPTY_OBJ;
     let result;
     if (city === '全国') {
-      result = await this.connector(staff).where({
+      result = await this.connector(cosHelper).where({
         uid,
       });
     } else {
-      result = await this.connector(staff).where({
+      result = await this.connector(cosHelper).where({
         uid,
         city,
       });
@@ -54,9 +54,9 @@ class User {
   getImages(img) {
     return JSON.parse(img);
   }
-  updateStaff(args) {
+  updateCosHelper(args) {
     const { sid, ...other } = args;
-    return this.connector(user).where({
+    return this.connector(users).where({
       sid,
     }).update(other);
   }
@@ -97,4 +97,4 @@ class User {
   }
 }
 
-export default User;
+export default Users;
