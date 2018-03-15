@@ -1,8 +1,8 @@
 const Staff = `
   type Staff {
-    sid: ID!
+    uid: ID
     vote(sid: ID!, uid: ID = -1): Vote
-    masterpiece: [String]!
+    images: [Image]!
     info: String
     exPrice: String
   }

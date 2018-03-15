@@ -18,6 +18,6 @@ const schema = makeExecutableSchema({
   resolvers,
 });
 
-// addMockFunctionsToSchema({ schema });
+addMockFunctionsToSchema({ schema });
 
 export default schema;

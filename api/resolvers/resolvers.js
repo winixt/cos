@@ -16,12 +16,15 @@ const resolvers = {
   },
   User: {
     staff: (obj, args, context) => {
-      return context.User.getStaff(obj.sid, args);
+      return context.User.getStaff(obj.uid, args);
     },
   },
   Staff: {
     vote: (obj, args, context) => {
       return context.User.getVote(args);
+    },
+    images: (obj, args, context) => {
+      return context.User.getImages(obj.masterpiece);
     },
   },
   Comment: {

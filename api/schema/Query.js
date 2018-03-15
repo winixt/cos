@@ -5,6 +5,7 @@ import Vote from './Vote';
 import Weight from './Weight';
 import IM from './IM';
 import Feedback from './Feedback';
+import Image from './Image';
 
 const Query = `
   type Query {
@@ -15,4 +16,4 @@ const Query = `
   }
 `;
 
-export default [Query, User, Staff, Comment, Vote, Weight, Feedback, ...IM];
+export default [Query, User, Staff, Comment, Vote, Weight, Feedback, Image, ...IM];

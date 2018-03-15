@@ -27,6 +27,13 @@ export function run() {
     console.log(`${code}: process exit and database disconnect`);
   });
   const server = express();
+
+  // 中间件设置响应头
+  server.use((req, res, next) => {
+    res.setHeader('Content-Type', 'application/json;charset=UTF-8');
+    next();
+  });
+  // 利用中间件将请求参数格式化为 JSON
   server.use(bodyParse.json());
 
   mountLoginAPI(server, token);

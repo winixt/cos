@@ -1,4 +1,6 @@
 import { user, staff, vote } from './table';
+import { EMPTY_OBJ } from '../setup';
+
 
 // TODO 数据个添加 | 更改
 class User {
@@ -34,19 +36,24 @@ class User {
     return this.connector(user).whereIn('uid', uids);
   }
 
-  getStaff(sid, args) {
-    const { city } = args;
+  async getStaff(uid, args) {
+    const { city } = args || EMPTY_OBJ;
+    let result;
     if (city === '全国') {
-      return this.connector(staff).where({
-        sid,
+      result = await this.connector(staff).where({
+        uid,
+      });
+    } else {
+      result = await this.connector(staff).where({
+        uid,
+        city,
       });
     }
-    return this.connector(staff).where({
-      sid,
-      city,
-    });
+    return result[0];
   }
-
+  getImages(img) {
+    return JSON.parse(img);
+  }
   updateStaff(args) {
     const { sid, ...other } = args;
     return this.connector(user).where({

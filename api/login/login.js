@@ -16,6 +16,7 @@ class Login {
     const uid = shortid();
     const salt = getSalt();
     const ctime = Date.now();
+    // TODO 验证手机号是否使用过
     this.connector(localAuth).insert({
       uid,
       phone,
