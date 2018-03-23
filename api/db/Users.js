@@ -1,99 +1,44 @@
-import { users, cosHelper, vote } from './table';
-import { EMPTY_OBJ } from '../setup';
+import { users } from './table';
 
 
-// TODO 数据个添加 | 更改
 class Users {
   constructor({ connector }) {
     this.connector = connector;
   }
 
-  async getUser(uid) {
+  async getUser(id) {
     const result = await this.connector(users).where({
-      uid,
+      id,
     });
     return result[0];
+  }
+
+  async addUser() {
+    try {
+      const result = await this.connector(users).returning('id').insert({
+        nickname: '次元世界',
+        message: '我们只是一群爱 cos 的人儿',
+        city: '全国',
+        ctime: this.connector.fn.now(),
+        loginTime: this.connector.fn.now(),
+      });
+      return {
+        id: result[0],
+        retCode: 0,
+      };
+    } catch (err) {
+      return {
+        retCode: 1,
+        error: err.message,
+      };
+    }
   }
 
   updateUser(args) {
-    const { uid, ...other } = args;
+    const { id, ...other } = args;
     return this.connector(users).where({
-      uid,
+      id,
     }).update(other);
-  }
-
-  getUsers(args) {
-    const { type, offset, limit } = args;
-    if (type) {
-      return this.connector(users).where({
-        type,
-      }).limit(limit).offset(offset);
-    }
-    return this.connector(users).limit(limit).offset(offset);
-  }
-
-  getUsersByID(uids) {
-    return this.connector(users).whereIn('uid', uids);
-  }
-
-  async getCosHelper(uid, args) {
-    const { city } = args || EMPTY_OBJ;
-    let result;
-    if (city === '全国') {
-      result = await this.connector(cosHelper).where({
-        uid,
-      });
-    } else {
-      result = await this.connector(cosHelper).where({
-        uid,
-        city,
-      });
-    }
-    return result[0];
-  }
-  getImages(img) {
-    return JSON.parse(img);
-  }
-  updateCosHelper(args) {
-    const { sid, ...other } = args;
-    return this.connector(users).where({
-      sid,
-    }).update(other);
-  }
-  async getVote(args) {
-    const { sid, uid } = args;
-    let active = false;
-    const count = await this.connector(vote)
-      .count()
-      .where({
-        sid,
-      });
-    if (uid !== -1) {
-      active = await this.connector(vote)
-        .select(1)
-        .where({
-          uid,
-        }).limit(1);
-    }
-    return {
-      count,
-      active,
-    };
-  }
-  upvote(args) {
-    const { sid, uid } = args;
-    return this.connector(vote).insert({
-      sid,
-      uid,
-      ctime: Date.now(),
-    });
-  }
-  downVote(args) {
-    const { sid, uid } = args;
-    return this.connector(vote).where({
-      sid,
-      uid,
-    }).del();
   }
 }
 

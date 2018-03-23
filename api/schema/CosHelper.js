@@ -1,15 +1,37 @@
-const Staff = `
-  type Staff {
+const CosHelper = `
+  type CosHelper {
     id: ID
-    uid: ID
+    uid: ID!
+    type: Int
+    voteCount: Int
     info: String
     cover: String
-    priceMin: INT
-    priceMax: INT
+    priceMin: Int
+    priceMax: Int
     city: String
-    representWork(cosId: ID!): [RepresentWork]!
-    vote(cosID: ID!, uid: ID = -1): Vote
+    representWork: [RepresentWork]!
+    vote(uid: ID!): Vote
+    commentCount: CommentCount
+    user: User
   }
 `;
 
-export default Staff;
+// cos 协助者代表作
+const RepresentWork = `
+  type RepresentWork {
+    id: ID
+    url: String!
+    width: Int
+    height: Int
+  }
+`;
+
+
+// active 表示当前用户是否点赞过
+const Vote = `
+  type Vote {
+    active: Boolean
+  }
+`;
+
+export default [CosHelper, RepresentWork, Vote];

@@ -1,60 +1,94 @@
-import { comments, commentWeight } from './table';
+import { comments, commentsActive, commentWeight } from './table';
 
 class Comments {
   constructor({ connector }) {
     this.connector = connector;
   }
+
   getComment(...args) {
-    const { sid, offset, limit } = args;
-    return this.connector(comments).where({
-      sid,
-    }).limit(limit).offset(offset);
+    const { cosId, offset, limit } = args;
+    return this.connector(commentsActive).where({
+      cosId,
+    }).orderBy('weight')
+      .limit(limit)
+      .offset(offset);
   }
-  addComment(args) {
-    const { uid, sid, message } = args;
-    return this.connector(comments).insert({
-      uid,
-      sid,
-      message,
-      ctime: Date.now(),
-    });
-  }
-  delComment(args) {
-    const { cid } = args;
-    this.connector(commentWeight).where({
-      cid,
-    }).del();
-    return this.connector(comments, cid).where({
-      id: cid,
-    }).del();
-  }
-  async getWeight(args) {
-    const { cid, uid } = args;
-    let active = false;
-    const count = await this.connector(commentWeight)
-      .count()
-      .where({
-        cid,
-      });
-    if (uid !== -1) {
-      active = await this.connector(commentWeight)
-        .select(1)
-        .where({
-          uid,
-        }).limit(1);
-    }
+
+  async getCommentCount(cosId) {
+    const result = await this.connector(commentsActive).where({
+      cosId,
+    }).count();
     return {
-      count,
-      active,
+      count: result[0]['count(*)'],
     };
   }
-  upWeight(args) {
-    const { cid, uid } = args;
-    return this.connector(commentWeight).insert({
-      cid,
+
+  async isLoveComment(args) {
+    const { comId, uid } = args;
+    const result = await this.connector(commentWeight).where({
+      comId,
       uid,
-      ctime: Date.now(),
     });
+    if (result.length > 0) {
+      return {
+        id: result[0].id,
+        active: true,
+      };
+    }
+    return {
+      active: false,
+    };
+  }
+
+  addComment(args) {
+    const { cosId, uid, content } = args;
+    return this.connector(comments).insert({
+      cosId,
+      uid,
+      content,
+      ctime: this.connector.fn.now(),
+    });
+  }
+
+  delComment(args) {
+    const { comId } = args;
+    this.connector(commentWeight).where({
+      comId,
+    }).del();
+    this.connector(commentsActive).where({
+      id: comId,
+    }).del();
+    return {
+      retCode: 0,
+    };
+  }
+
+  upWeight(args) {
+    const { comId, uid } = args;
+    this.connector(commentsActive).where({
+      id: comId,
+    }).increment('weight', 1);
+    this.connector(commentWeight).insert({
+      comId,
+      uid,
+      ctime: this.connector.fn.now(),
+    });
+    return {
+      retCode: 0,
+    };
+  }
+  downWeight(args) {
+    const { comId, uid } = args;
+    this.connector(commentsActive).where({
+      id: comId,
+    }).decrement('weight', 1);
+    this.connector(commentWeight).where({
+      comId,
+      uid,
+    }).del();
+    return {
+      retCode: 0,
+    };
   }
 }
 

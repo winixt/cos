@@ -5,12 +5,12 @@ import { pubsub } from '../subscriptions';
 const resolvers = {
   Query: {
     user: (obj, args, context) => {
-      return context.Users.getUser(args.uid);
+      return context.Users.getUser(args.id);
     },
     cosHelper: (obj, args, context) => {
-      return context.Users.getUsers(args);
+      return context.Users.getUsersByType(args);
     },
-    comment: (obj, args, context) => {
+    comments: (obj, args, context) => {
       return context.Comments.getComment(args);
     },
   },
