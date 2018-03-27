@@ -1,8 +1,15 @@
-import { cosHelper, representWork, vote } from './table';
+import { cosHelper, representWork, cosHelperType, vote } from './table';
 
 class CosHelper {
   constructor({ connector }) {
     this.connector = connector;
+  }
+
+  async getCosHelper(uid) {
+    const result = await this.connector(cosHelper).innerJoin(cosHelperType, `${cosHelper}.id`, `${cosHelperType}.cosId}`).where({
+      uid,
+    });
+    return result[0];
   }
 
   getCosHelperByType(args) {
@@ -12,19 +19,13 @@ class CosHelper {
       offset,
       limit,
     } = args;
-    return this.connector(cosHelper).where({
+
+    return this.connector(cosHelper).innerJoin(cosHelperType, `${cosHelper}.id`, `${cosHelperType}.cosId}`).where({
       type,
       city,
-    }).orderBy('voteCount')
+    }).orderBy('VoteCount')
       .limit(limit)
       .offset(offset);
-  }
-
-  async getCosHelper(uid) {
-    const result = await this.connector(cosHelper).where({
-      uid,
-    });
-    return result[0];
   }
 
   async getVote(args) {
@@ -33,7 +34,7 @@ class CosHelper {
       .where({
         cosId,
         uid,
-      }).limit(1);
+      });
 
     return {
       active,
@@ -48,9 +49,11 @@ class CosHelper {
   }
 
   async addCosHelper(args) {
-    const params = Object.assign({}, args, { ctime: this.connector.fn.now() });
+    const { type, ...cos } = args;
+    const params = Object.assign({}, cos, { ctime: this.connector.fn.now() });
     try {
       const result = await this.connector(cosHelper).returning('id').insert(params);
+      this.addCosHelperType(result[0], type);
       return {
         id: result[0],
         retCode: 0,
@@ -63,11 +66,42 @@ class CosHelper {
     }
   }
 
+  addCosHelperType(cosId, types) {
+    if (types.length > 0) {
+      this.connector(cosHelperType).insert(types.map((type) => {
+        return { cosId, type };
+      }));
+    }
+    return {
+      retCode: 0,
+    };
+  }
+
+  delCosHelperType(cosId, types) {
+    this.connector(cosHelperType).where({
+      cosId,
+    }).whereIn('type', types);
+    return {
+      retCode: 0,
+    };
+  }
+
+
   updateCosHelper(args) {
-    const { id, ...other } = args;
-    return this.connector(cosHelper).where({
-      id,
+    const { cosId, types, ...other } = args;
+    if (!cosId) {
+      return {
+        retCode: 1,
+        error: '缺省 cosId',
+      };
+    }
+    this.connector(cosHelper).where({
+      id: cosId,
     }).update(other);
+    this.addCosHelperType(cosId, types);
+    return {
+      retCode: 0,
+    };
   }
 
   // 添加新的代表作
@@ -86,10 +120,11 @@ class CosHelper {
     }
   }
   // 删除代表作
-  delRepresentWork(id) {
-    return this.connector(representWork).where({
-      id,
-    }).del();
+  delRepresentWork(ids) {
+    this.connector(representWork).whereIn('id', ids).del();
+    return {
+      retCode: 0,
+    };
   }
 
   // 点赞
@@ -98,11 +133,14 @@ class CosHelper {
     this.connector(cosHelper).where({
       id: cosId,
     }).increment('voteCount', 1);
-    return this.connector(vote).insert({
+    this.connector(vote).insert({
       cosId,
       uid,
       ctime: this.connector.fn.now(),
     });
+    return {
+      retCode: 0,
+    };
   }
 
   // 取消点赞

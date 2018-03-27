@@ -3,6 +3,7 @@ module.exports = {
   token: 'token',
   users: 'users',
   cosHelper: 'cosHelper',
+  cosHelperType: 'cosHelperType',
   representWork: 'representWork',
   vote: 'cosHelperVote',
   comments: 'comments',

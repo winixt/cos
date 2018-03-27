@@ -5,7 +5,7 @@ class Comments {
     this.connector = connector;
   }
 
-  getComment(...args) {
+  getComment(args) {
     const { cosId, offset, limit } = args;
     return this.connector(commentsActive).where({
       cosId,
@@ -23,8 +23,7 @@ class Comments {
     };
   }
 
-  async isLoveComment(args) {
-    const { comId, uid } = args;
+  async isLoveComment(comId, uid) {
     const result = await this.connector(commentWeight).where({
       comId,
       uid,
@@ -40,14 +39,18 @@ class Comments {
     };
   }
 
-  addComment(args) {
+  async addComment(args) {
     const { cosId, uid, content } = args;
-    return this.connector(comments).insert({
+    const result = await this.connector(comments).returning('id').insert({
       cosId,
       uid,
       content,
       ctime: this.connector.fn.now(),
     });
+    return {
+      id: result[0],
+      retCode: 0,
+    };
   }
 
   delComment(args) {

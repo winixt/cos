@@ -1,23 +1,36 @@
 const Input = `
+  input UserInput {
+    uid: ID!
+    gender: Int
+    nickname: String
+    avatar: String
+    message: String
+    city: String
+  }
+  
+  input CosHelperInput {
+    cosId: ID
+    uid: ID
+    type: [Int]!
+    info: String
+    cover: String
+    priceMin: Int
+    priceMax: Int
+    city: String
+  }
+
+  input RepresentWork {
+    id: ID
+    cosId: ID
+    url: String
+    width: Int
+    height: Int
+  }
+  
   input CommentInput {
     cosId: ID!
     uid: ID!
     content: String
-  }
-
-  input UserInput {
-    uid: ID!
-    type: Int
-    name: String
-    message: String
-    avatar: String
-  }
-
-  input StaffInput {
-    sid: ID!
-    masterpiece: String,
-    info: String,
-    exPrice: String
   }
 
   input ImRoomInput {

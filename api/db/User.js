@@ -1,14 +1,14 @@
 import { users } from './table';
 
 
-class Users {
+class User {
   constructor({ connector }) {
     this.connector = connector;
   }
 
-  async getUser(id) {
+  async getUser(uid) {
     const result = await this.connector(users).where({
-      id,
+      id: uid,
     });
     return result[0];
   }
@@ -19,8 +19,8 @@ class Users {
         nickname: '次元世界',
         message: '我们只是一群爱 cos 的人儿',
         city: '全国',
-        ctime: this.connector.fn.now(),
         loginTime: this.connector.fn.now(),
+        ctime: this.connector.fn.now(),
       });
       return {
         id: result[0],
@@ -35,11 +35,25 @@ class Users {
   }
 
   updateUser(args) {
-    const { id, ...other } = args;
-    return this.connector(users).where({
-      id,
+    const { uid, ...other } = args;
+    this.connector(users).where({
+      id: uid,
     }).update(other);
+    return {
+      retCode: 0,
+    };
+  }
+
+  updateUserLoginTime(uid) {
+    this.connector(users).where({
+      id: uid,
+    }).update({
+      loginTime: this.connector.fn.now(),
+    });
+    return {
+      retCode: 0,
+    };
   }
 }
 
-export default Users;
+export default User;

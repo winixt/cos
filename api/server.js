@@ -4,7 +4,7 @@ import koaBody from 'koa-bodyparser';
 import { graphqlKoa, graphiqlKoa } from 'apollo-server-koa';
 
 import knex from './db';
-import { Users, Comments, IM, Feedback } from './db/modles';
+import { User, CosHelper, Comments, IM, Feedback } from './db/modles';
 import schema from './schema';
 
 export function run() {
@@ -26,7 +26,8 @@ export function run() {
   const params = {
     schema,
     context: {
-      User: new Users({ connector: knex }),
+      User: new User({ connector: knex }),
+      CosHelper: new CosHelper({ connector: knex }),
       Comment: new Comments({ connector: knex }),
       IM: new IM({ connector: knex }),
       Feedback: new Feedback({ connector: knex }),
