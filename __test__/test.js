@@ -1,6 +1,12 @@
-function test(args) {
-  const { id, ...other } = args;
-  console.log(other);
+class Hero {
+  constructor(s) {
+    this.str = s;
+  }
+  outputStr(s) {
+    return this.str + s;
+  }
 }
 
-test({ id: 1, test: 'hello wold' });
+const hero = new Hero('I am ');
+
+console.log(hero.outputStr('hello'));
